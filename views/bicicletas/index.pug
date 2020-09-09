@@ -1,30 +1,48 @@
-extends ../layout
+link(href='../../stylesheets/style.css' rel='stylesheet')
+link(href='../../stylesheets/style3.css' rel='stylesheet')
 
 block content
-  a(href='bicicletas/create') Nueva Bicicleta
-  br
-  br
-  table.table
-    thead
-      tr
-        th(scope='col') #
-        th(scope='col') Color
-        th(scope='col') Modelo
-        th(scope='col') Ubicacion
-        th(scope='col') 
-        th(scope='col') 
-    tbody
-      each bici in bicis
-        tr
-          td(scope='row')
-            = bici.id
-          td= bici.color
-          td= bici.modelo
-          td= bici.ubicacion
-          td
-            a(href='bicicletas/' + bici.id + '/update') Editar
-          td
-            form.inline(method='post' action="bicicletas/" + bici.id + '/delete')
-                input(type="hidden" name='id' value= bici.id)
-                button.link-button(type='submit' name='submit_param' value='submit_value' class='btn')
-                 = 'Eliminar'
+  section.contact-section.bg-black
+    .container
+      .card-body.text-center
+        .card.py-4.h-100
+          .card-body.text-center
+            i.fas.fa-mobile-alt.text-primary.mb-2
+            a(href='bicicletas/create') Crear Nueva Bicicleta
+            br
+            br
+            br
+            br
+            table.table
+              thead
+                tr
+                  th(scope='col') #
+                  th(scope='col') Color
+                  th(scope='col') Modelo
+                  th(scope='col') Ubicacion
+                  th(scope='col')  
+                  th(scope='col')  
+              tbody
+                each bici in bicis
+                  tr
+                    td(scope='row')
+                      = bici.id
+                    td= bici.color
+                    td= bici.modelo
+                    td= bici.ubicacion
+                    td
+                      a(href='bicicletas/' + bici.id + '/update') Editar
+                    td
+                      form.inline(method='post' action="bicicletas/" + bici.id + '/delete')
+                          input(type="hidden" name='id' value= bici.id)
+                          button.link-button(type='submit' name='submit_param' value='submit_value' class='btn') Eliminar
+            br
+            br
+        br
+        .large.text-black-50
+          a(href='/') Volver
+        .social.d-flex.justify-content-center
+          br
+          br
+          br
+          br
