@@ -1,3 +1,36 @@
+body {
+  margin: 0;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: black;
+}
 #main_map {
     height: 600px;
 }
+
+div {
+    margin: .0em 0;
+  }
+  div label {
+    margin: .5em 0;
+    width: 100px;
+    float: center;
+  }
+
+  .contact-section .card h4 {
+    font-size: 2.0rem;
+
+}
+
+
+.card-body {
+  flex: 0 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+  height: 500px;
+  
+}
+
+.center-div {
+  text-align: center;
+}
+

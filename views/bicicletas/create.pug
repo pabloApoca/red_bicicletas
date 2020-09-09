@@ -1,32 +1,50 @@
-extends ../layout
+link(href='../../stylesheets/style.css' rel='stylesheet')
+link(href='../../stylesheets/style2.css' rel='stylesheet')
+
+link(href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet')
+link(href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i' rel='stylesheet')
+  
+link(rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==' crossorigin='')
+
+script(src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js' integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==' crossorigin='')
+
 
 block content
-  a(href='/bicicletas') Volver
-
-  br
-  br
-  br
-
-  h1 Nueva Bicicleta
-
-  br
-  br
-
-  form(action='/bicicletas/create' method='post')
-    label(for='id') ID:
-    input#id(type='text' name='id')
-    br
-    label(for='color') Color:
-    input#color(type='text' name='color')
-    br
-    label(for='modelo') Modelo:
-    input#modelo(type='text' name='modelo')
-    br
-    label(for='lat') Latiud:
-    input#modelo(type='text' name='lat')
-    br
-    label(for='lng') Longitud:
-    input#modelo(type='text' name='lng')
-    br
-    br
-    input.btn(type='submit' value='OK')
+section.contact-section.bg-black
+  .container
+    .card-body.text-center
+      .card.py-4.h-100
+        .card-body.text-center
+          i.fas.fa-mobile-alt.text-primary.mb-2
+          h4.text-uppercase.m-0 Nueva Bicicleta
+          hr.my-4
+        form(action='/bicicletas/create' method='post')
+          fieldset
+          div
+            label(for='id') ID:
+            input#id(type='text' name='id' size='18')
+            br
+          div
+            label(for='color') COLOR:
+            input#color(type='text' name='color' size='18')
+            br
+          div
+            label(for='modelo') MODELO:
+            input#modelo(type='text' name='modelo' size='18')
+            br
+          div
+            label(for='lat') LATITUD:
+            input#modelo(type='text' name='lat' size='18')
+            br
+          div
+            label(for='lng') LONGITUD:
+            input#modelo(type='text' name='lng' size='18')
+            br
+          br
+          input.btn.btn-primary.mx-auto(type='submit' value='OK')
+      br
+      .large.text-black-50
+        a(href='/bicicletas') Volver
+      .social.d-flex.justify-content-center
+        br
+        br

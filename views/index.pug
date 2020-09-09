@@ -37,6 +37,15 @@ block content
   section#projects.projects-section.bg-light
     .container
       #main_map
+  // Ver bicicletas
+  section.center-div
+  br
+  .container(text-align='center')
+    div
+      form(action='/bicicletas')
+        h2(text-align='center') Mira nuestras bicicletas
+        button.btn.btn-primary.mx-auto(type='submit') Ver Bicicletas
+  br
   // Signup
   section#signup.signup-section
     .container
@@ -55,9 +64,9 @@ block content
           .card.py-4.h-100
             .card-body.text-center
               i.fas.fa-map-marked-alt.text-primary.mb-2
-              h4.text-uppercase.m-0 Address
+              h4.text-uppercase.m-0 Direccion
               hr.my-4
-              .small.text-black-50 4923 Market Street, Orlando FL
+              .small.text-black-50 Buenos Aires, CABA
         .col-md-4.mb-3.mb-md-0
           .card.py-4.h-100
             .card-body.text-center
@@ -65,24 +74,24 @@ block content
               h4.text-uppercase.m-0 Email
               hr.my-4
               .small.text-black-50
-                a(href='#!') hello@yourdomain.com
+                a(href='#!') red_bicicletas@gmail.com
         .col-md-4.mb-3.mb-md-0
           .card.py-4.h-100
             .card-body.text-center
               i.fas.fa-mobile-alt.text-primary.mb-2
-              h4.text-uppercase.m-0 Phone
+              h4.text-uppercase.m-0 TELEFONO
               hr.my-4
-              .small.text-black-50 +1 (555) 902-8832
+              .small.text-black-50 +54 1165548214
       .social.d-flex.justify-content-center
         a.mx-2(href='#!')
           i.fab.fa-twitter
         a.mx-2(href='#!')
           i.fab.fa-facebook-f
         a.mx-2(href='#!')
-          i.fab.fa-github
+          i.fab.fa-instagram
   // Footer
   footer.footer.bg-black.small.text-center.text-white-50
-    .container Copyright &copy; Your Website 2020
+    .container Copyright &copy; RED BICICLETAS 2020
   // Bootstrap core JS
   script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js')
   script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js')
