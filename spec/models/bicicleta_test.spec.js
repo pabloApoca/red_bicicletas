@@ -1,28 +1,40 @@
+const { ConsoleReporter } = require('jasmine');
 var mongoose = require('mongoose');
 var Bicicleta = require('../../models/bicicleta');
 //const { removeById } = require('../../models/bicicleta');
 
+//jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
 describe('Testing Bicicletas', function(){
+
+    //jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+
     beforeEach(function(done){
+        //originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+       // jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
         var mongoDB = 'mongodb://localhost/testdb';
         mongoose.connect(mongoDB, { useNewUrlParser: true});
 
         const db = mongoose.connection;
         db.on('error', console.error.bind(console, 'connection error'));
-        db.once('open', function(){
+        db.once('open', function() {
             console.log('We are connected to test database!');
             done();
         });
     });
 
     afterEach(function(done){
-        Bicicleta.deleteMany({}, function(err, success){
+       // jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
+      //  jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+     // jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
+        Bicicleta.deleteMany({},  function(err, success){
             if (err) console.log(err);
             done();
         });
+     
     });
 
-    describe('Bicicleta.createInstace', () => {
+    describe('Bicicleta.createInstance', () => {
         it('crea una instancia de Bicicleta', () => {
             var bici = Bicicleta.createInstance(1, "Verde", "Urbana", [-34.5, -54.1]);
 
@@ -34,10 +46,11 @@ describe('Testing Bicicletas', function(){
         });
     });
 
+  
     describe('Bicicleta.allBicis', () => {
         it('comienza vacia', (done) => {
             Bicicleta.allBicis(function(err, bicis){
-                expect(bicis.lenght).toBe(0);
+                expect(bicis.length).toBe(0);
                 done();
             });
         });
@@ -49,15 +62,43 @@ describe('Testing Bicicletas', function(){
             Bicicleta.add(aBici, function(err, newBici){
                 if (err) console.log(err);
                 Bicicleta.allBicis(function(err, bicis){
-                    expect(bicis.lenght).toEqual(1);
+                    expect(bicis.length).toEqual(1);
                     expect(bicis[0].code).toEqual(aBici.code);
 
                     done();
-                })
-            })
-        })
-    })
+                });
+            });
+        });
+    });
 
+    describe('Bicicleta.findByCode', () =>{
+        it('debe devolver la bici con code 1', (done) =>{
+            Bicicleta.allBicis(function(err, bicis){
+                expect(bicis.length).toBe(0);
+
+                var aBici = new Bicicleta({code: 1, color:"verde", modelo: "urbana"});
+                Bicicleta.add(aBici, function(err, newBici){
+                    if(err) Console.log(err);
+
+                    var aBici2 = new Bicicleta({code: 2, color: "roja", modelo: "urbana"});
+                    Bicicleta.add(aBici2, function(err, newBici){
+                        if(err) console.log(err);
+                        Bicicleta.findByCode(1, function(error, targetBici){
+                            expect(targetBici.code).toBe(aBici.code);
+                            expect(targetBici.color).toBe(aBici.color);
+                            expect(targetBici.modelo).toBe(aBici.modelo);
+                            
+                            done();
+                        });
+                    });
+                });
+            });
+
+
+        });
+    });
+
+   
 
 });
 
