@@ -1,18 +1,38 @@
+var mongoose = require('mongoose'); 
 var Bicicleta = require('../../models/bicicleta');
 var request = require('request');
 var server = require('../../bin/www');
 
+var base_url = "http://localhost:5000/api/bicicletas";
+
+
 describe('Bicicleta API', () => {
+
+    beforeEach(function(done) {
+        mongoose.connect(mongoDB, { useNewUrlParser: true});
+
+        const db = mongoose.connection;
+        db.on('error', console.error.bind(console, 'connection error'));
+        db.once('open', function() {
+            console.log('We are connected to test database!');
+            done();
+        });
+    });
+
+    afterEach(function(done){
+        Bicicleta.deleteMany({}, function(err, success){
+            if(err) console.log(err);
+            done();
+        });
+    });
+
     describe('GET BICICLETAS /', () => {
-        it('Status 200', () => {
-            expect(Bicicleta.allBicis.length).toBe(0);
-
-            var a = new Bicicleta(1, 'Rojo', 'Montaña', [-34.6012424,-58.3861497]);
-            Bicicleta.add(a);
-
-            request.get('http://localhost:3000/api/bicicletasAPI', function(error, response, body){
+        it('Status 200', (done) => {
+            request.get(base_url, function(error, response, body){
+                var result = JSON.parse(body);
                 expect(response.statusCode).toBe(200);
-
+                expect(result.bicicletas.length).toBe(0);
+                done();
             });
         });
     });
