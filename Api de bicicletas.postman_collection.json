@@ -62,10 +62,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\":5,\r\n    \"color\": \"rojo\",\r\n    \"modelo\": \"Mountainbike\",\r\n    \"lat\": -34.603532, \r\n    \"lng\":-58.379371\r\n}",
-					"options": {
-						"raw": {}
-					}
+					"raw": "{\r\n    \r\n    \"color\": \"rojo\",\r\n    \"modelo\": \"Mountainbike\",\r\n    \"lat\": -34.603532, \r\n    \"lng\":-58.379371\r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/api/bicicletasAPI/create",
@@ -90,7 +87,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 2\r\n}",
+					"raw": "{\r\n    \"id\": 4\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -144,6 +141,86 @@
 						"api",
 						"bicicletasAPI",
 						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/usuarios/reservar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"5f6ab6759211f443e8281ea4\",\r\n    \"bici_id\": \"5f6abb3686ffa727f03e1ae8\",\r\n    \"desde\": \"2020-09-21\",\r\n    \"hasta\": \"2020-09-23\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/usuarios/reservar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuarios",
+						"reservar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/usuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/usuarios/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"pablo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/usuarios/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuarios",
+						"create"
 					]
 				}
 			},

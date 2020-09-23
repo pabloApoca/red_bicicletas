@@ -8,14 +8,13 @@ exports.bicicleta_list = function(req, res){
 }
 
 exports.bicicleta_create = function (req, res){
-    var bici = new Bicicleta(req.body.id, req.body.color, req.body.modelo);
+    var bici = new Bicicleta({id : req.body.id, color: req.body.color,modelo: req.body.modelo});
     bici.ubicacion = [req.body.lat, req.body.lng];
 
-    Bicicleta.add(bici);
-
-    res.status(200).json({
-        bicicleta: bici
+    bici.save(function(err){
+        res.status(200).json(bici);
     });
+
 }
 //es lo mismo que el create nomas que hay que ponerle una busqueda al principio
 exports.bicicleta_update = function(req, res){
