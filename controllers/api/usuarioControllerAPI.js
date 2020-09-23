@@ -3,7 +3,7 @@ var Usuario = require('../../models/usuario');
 exports.usuarios_list = function(req, res){
     Usuario.find({}, function(err, usuarios){
         res.status(200).json({
-            usuario: usuarios
+            usuarios: usuarios
         });
     });
 };

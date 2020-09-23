@@ -37,7 +37,9 @@ describe('Testing Usuarios', function(){
         it('debe existir la reserva', (done) => {
             const usuario = new Usuario({nombre: "Pablo"});
             usuario.save();
-
+            const bicicleta = new Bicicleta({code: 1, color: "verde", modelo:"urbana"});
+            bicicleta.save();
+            
             var hoy = new Date();
             var mañana = new Date();
             mañana.setDate(hoy.getDate() +1);

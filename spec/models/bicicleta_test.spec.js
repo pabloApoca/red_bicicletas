@@ -1,17 +1,11 @@
 const { ConsoleReporter } = require('jasmine');
 var mongoose = require('mongoose');
 var Bicicleta = require('../../models/bicicleta');
-//const { removeById } = require('../../models/bicicleta');
 
-//jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
-describe('Testing Bicicletas', function(){
+describe('Testing Bicicletas', function() {
 
-    //jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
 
-    beforeEach(function(done){
-        //originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-       // jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
+    beforeAll(function(done) {
         var mongoDB = 'mongodb://localhost/testdb';
         mongoose.connect(mongoDB, { useNewUrlParser: true});
 
@@ -36,6 +30,7 @@ describe('Testing Bicicletas', function(){
 
     describe('Bicicleta.createInstance', () => {
         it('crea una instancia de Bicicleta', () => {
+
             var bici = Bicicleta.createInstance(1, "Verde", "Urbana", [-34.5, -54.1]);
 
             expect(bici.code).toBe(1);
@@ -43,11 +38,12 @@ describe('Testing Bicicletas', function(){
             expect(bici.modelo).toBe("Urbana");
             expect(bici.ubicacion[0]).toEqual(-34.5);
             expect(bici.ubicacion[1]).toEqual(-54.1);
-        });
+        })
     });
 
   
     describe('Bicicleta.allBicis', () => {
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
         it('comienza vacia', (done) => {
             Bicicleta.allBicis(function(err, bicis){
                 expect(bicis.length).toBe(0);
