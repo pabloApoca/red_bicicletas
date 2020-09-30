@@ -7,13 +7,29 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usuariosRouter = require('./routes/usuarios');
 var tokenRouter = require('./routes/token')
+const passport = require('./config/passport');
+const session = require('express-session');
+const jwt = require('jsonwebtoken');
 
 var usersRouter = require('./routes/users');
 var bicicletasRouter = require('./routes/bicicletas');
 var bicicletasAPIRouter = require('./routes/api/bicicletasAPI');
 var usuariosAPIRouter = require('./routes/api/usuarios');
 
+const store = new session.MemoryStore;
+//app.set('secretKey', 'jwt_pwd_!1223344');
+
+
 var app = express();
+
+
+app.use(session({
+  cookie: { maxAge: 240 * 60 * 60 * 1000 },
+  store: store,
+  saveUninitialized: true,
+  resave: 'true',
+  secret: 'red_bicis_123456'
+}));
 
 var mongoose = require('mongoose');
 
@@ -32,6 +48,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
