@@ -52,6 +52,36 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/login', function(req, res) {
+  res.render('session/login');
+});
+
+app.post('/login', function(req, res, next) {
+
+});
+
+app.get('/logout', function(req, res) {
+
+});
+
+app.get('/forgotPassword', function(req, res) {
+});
+
+app.post('/forgotPassword', function(req, res) {
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/token', tokenRouter);
