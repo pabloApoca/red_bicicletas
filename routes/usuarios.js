@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var usuariosController = require('../controllers/usuarios');
+var usuariosController = require('../controllers/usuario');
 
 router.get('/', usuariosController.list);
 router.get('/create', usuariosController.create_get);
