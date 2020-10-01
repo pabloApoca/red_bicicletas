@@ -11,6 +11,9 @@ const passport = require('./config/passport');
 const session = require('express-session');
 const jwt = require('jsonwebtoken');
 
+var Usuario = require('./models/usuario');
+var Token = require('./models/token');
+
 var usersRouter = require('./routes/users');
 var bicicletasRouter = require('./routes/bicicletas');
 var bicicletasAPIRouter = require('./routes/api/bicicletasAPI');
@@ -73,22 +76,53 @@ app.get('/logout', function(req,res){
   res.redirect('/');
 });
 
-app.get('/forgotPassword', function(req, res) {
+app.get('/forgotPassword', function(req,res){
+  res.render('session/forgotPassword');
 });
 
-app.post('/forgotPassword', function(req, res) {
+app.post('/forgotPassword', function(req,res,next){
+	//console.log(req.body.email);
+  Usuario.findOne( { email: req.body.email }, function (err, usuario) {
+    if (!usuario) return res.render('forgotPassword', {info: {message: 'No existe el email para un usuario existente.'}});
 
+    usuario.resetPassword(function(err) {
+      if (err) return next(err);
+      console.log(err);
+      console.log('forgotPasswordMessage');
+    });
+    
+    res.render('forgotPasswordMessage');
+  });
 });
 
+app.get('/resetPassword/:token', function( req, res, next ){
+  Token.findOne({token: req.params.token}, function(err,token){
+  if(!token) return res.status(400).send({type:'not-verified',msg:'No existe usuario asociado al token. Verifique que su token no haya expirado'});
 
+  Usuario.findById(token._userId, function( err, usuario ){
+    if(err) return res.status(400).send({msg: 'No existe usuario asociado al token'});
+    res.render('session/resetPassword', {errors:{},usuario:usuario});
+  });
+  })    
+});
 
+app.post('/resetPassword', function( req,res,next ){
+	if(req.body.password != req.body.confirm_password){
+		res.render('session/resetPassword', {errors:{confirm_password:'No coincide con el password ingresado'}});
+		return;
+	}
 
-
-
-
-
-
-
+	Usuario.findOne({email:req.body.email}, function(err,usuario){
+		usuario.password = req.body.password;
+		usuario.save(function(err){
+			if(err){
+				res.render('session/resetPassword',{errors:err.errors,usuario: new Usuario()});
+			} else {
+				res.redirect('/login');
+			}
+		});
+	});
+});
 
 
 app.use('/', indexRouter);
@@ -96,7 +130,7 @@ app.use('/usuarios', usuariosRouter);
 app.use('/token', tokenRouter);
 
 app.use('/users', usersRouter);
-app.use('/bicicletas', bicicletasRouter);
+app.use('/bicicletas',loggedIn,bicicletasRouter);
 app.use('/api/bicicletasAPI', bicicletasAPIRouter);
 app.use('/api/usuarios', usuariosAPIRouter);
 
@@ -115,5 +149,14 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+function loggedIn( req,res,next ){
+	if(req.user){
+		next();
+	} else {
+		console.log('Usuario sin loguearse');
+		res.redirect('/login');
+	}
+}
 
 module.exports = app;
