@@ -12,6 +12,7 @@ exports.usuarios_create = function(req, res){
   var usuario = new Usuario({nombre: req.body.nombre});
 
   usuario.save(function(err){
+    if(err) return res.status(500).json(err);
     res.status(200).json(usuario);
   });
 };

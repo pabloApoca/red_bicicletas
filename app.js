@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -36,7 +37,11 @@ app.use(session({
   secret: 'red_bicis_13537842!!!!345$&/(/$'
 }));
 
-var mongoDB = 'mongodb://localhost/red_bicicletas';
+//Si estoy en el ambiente de desarrollo usar
+//var mongoDB = 'mongodb://localhost/red_bicicletas';
+//Si estoy en el ambiente de produccion usar
+//mongodb+srv://admin:<password>@cluster0.ut7ie.mongodb.net/<dbname>?retryWrites=true&w=majority
+var mongoDB = process.env.MONGO_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set('useCreateIndex', true);
 var db = mongoose.connection;
