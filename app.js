@@ -1,4 +1,6 @@
 require('dotenv').config();
+require('newrelic');
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -10,7 +12,6 @@ const passport = require('./config/passport');
 const session = require('express-session');
 const jwt = require('jsonwebtoken');
 const MongoDBStore = require('connect-mongodb-session')(session);
-
 const Usuario = require('./models/usuario');
 
 var indexRouter = require('./routes/index');
